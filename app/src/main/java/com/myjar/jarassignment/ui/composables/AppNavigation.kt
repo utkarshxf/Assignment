@@ -63,7 +63,7 @@ fun ItemListScreen(
     navigate: MutableState<String>,
     navController: NavHostController
 ) {
-    val items = viewModel.listStringData.collectAsState()
+    val items = viewModel.searchItem.collectAsState()
     var searchQuery by remember { mutableStateOf("") }
     Log.e("ItemListScreen", "ItemListScreen: ${items.value}")
     // Handle navigation
@@ -96,6 +96,7 @@ fun ItemListScreen(
                 value = searchQuery,
                 onValueChange = { onChange ->
                     searchQuery = onChange
+                    viewModel.search(searchQuery)
                 })
             LazyColumn(
                 modifier = Modifier
